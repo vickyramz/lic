@@ -133,9 +133,7 @@ export default function AddEditContact({ route, navigation }) {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <Header headerText={headerText}
 
-      ></Header>
       <KeyboardAvoidingView
         behavior="height"
         enabled={true}
@@ -157,6 +155,13 @@ export default function AddEditContact({ route, navigation }) {
                 flexGrow: 1,
                 justifyContent: 'flex-start',
               }}>
+              <Header
+                showBack={true}
+                headerText={headerText}
+                backEvent={() => {
+                  navigation.pop();
+                }}
+              ></Header>
               <View style={styles.container}>
                 <TextInput
                   style={styles.textField}

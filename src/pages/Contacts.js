@@ -52,6 +52,23 @@ export default function Contacts({ navigation }) {
 
   const onSearch = async (value) => {
     setsearchString(value)
+
+
+    let payload = {
+      key: 'search',
+      sphase: value
+    };
+
+    let res = await axios.post('contacts.php?paccess=Apiandaccess', payload)
+
+    setContacts(res.data)
+
+    console.log(res.data)
+
+  }
+
+  const loadMore = async () => {
+
   }
 
   return (
@@ -62,6 +79,10 @@ export default function Contacts({ navigation }) {
         actionText="Add"
         actionEvent={() => {
           navigation.navigate('AddEditContact', { edit: false });
+        }}
+        showBack={true}
+        backEvent={() => {
+          navigation.pop();
         }}></Header>
 
       <Spinner
@@ -84,6 +105,11 @@ export default function Contacts({ navigation }) {
           renderItem={renderItem}
           keyExtractor={item => item.id}
           refreshControl={<RefreshControl refreshing={refreshing} onRefresh={getData} />}
+          initialNumToRender={20}
+          onEndReachedThreshold={5}
+          onEndReached={() => {
+            loadMore()
+          }}
         />
       </View>
     </SafeAreaView>

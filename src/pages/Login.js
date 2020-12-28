@@ -36,6 +36,7 @@ export default function Login({ navigation }) {
   const onSubmit = (values) => {
 
     storage.storeData("loggedIn", "true")
+    
     navigation.replace('Home')
 
   }
